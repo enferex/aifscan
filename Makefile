@@ -1,4 +1,4 @@
-CXXFLAGS=-g3 -O0 -std=c++17 -pedantic -Wall
+CXXFLAGS=-g0 -O3 -std=c++17 -pedantic -Wall
 APP=aifscan
 all: aifscan
 

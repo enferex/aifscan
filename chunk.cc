@@ -17,9 +17,6 @@ std::unique_ptr<Chunk> Chunk::create(std::ifstream &fp,
     case FORM:
       chunk = std::make_unique<Form>(std::move(hdr));
       break;
-    case MARKER:
-      chunk = std::make_unique<Marker>(std::move(hdr));
-      break;
     case OTHER:
       chunk = std::make_unique<Chunk>(std::move(hdr));
       break;
@@ -163,8 +160,6 @@ void Form::dump() const {
 void Form::write(const std::string &prefix) const {
   for (const auto &chunk : chunks) chunk->write(prefix);
 }
-
-bool Marker::parse(std::ifstream &fp) { return true; }
 
 bool Chunk::parse(std::ifstream &fp) {
   // Skip past this chunk.

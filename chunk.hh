@@ -15,7 +15,6 @@ using ID = char[4];
 
 enum ChunkType {
   FORM,
-  MARKER,
   OTHER,
 };
 
@@ -61,19 +60,6 @@ struct Form : public Chunk {
   void dump() const override;
   Form(std::unique_ptr<ChunkHeader> hdr) : Chunk(std::move(hdr), FORM) {}
   void write(const std::string &prefix) const override;
-
- private:
-  bool parse(std::ifstream &fp) override;
-};
-
-struct Marker : public Chunk {
-  struct MarkerEntry {
-    uint16_t markerID;
-    uint32_t position;
-    std::string markerName;
-  };
-  std::vector<std::unique_ptr<MarkerEntry>> markers;
-  Marker(std::unique_ptr<ChunkHeader> hdr) : Chunk(std::move(hdr), MARKER) {}
 
  private:
   bool parse(std::ifstream &fp) override;
